@@ -17,7 +17,10 @@ client.on("ready", () => {
 
 client.on("messageCreate", (message) => {
     if (channels.includes(message.channel.name) && message.content.startsWith("Start ") && !currentGames[message.channel.name]) {    
-      tryCreate(message)
+      tryCreate(message);
+    }
+    if (channels.includes(message.channel.name) && !currentGames[message.channel.name] && message.content == "Help") {
+        message.channel.send("To start a queue for the game, use 'Start x' where x is the number of seconds you want the queue to last");
     }
     if (message.channel.name === "monopoly" && message.content === "s")
         new Queue(message.channel, em, 3);
