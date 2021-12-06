@@ -6,15 +6,10 @@ const channels = ["monopoly"];
 const Games = [require('./src/monopoly/monopoly.js')]
 const currentGames = {};
 var events = require('events');
+require('dotenv').config()
 var em = new events.EventEmitter();
 
-/*
-console.log(Games[0].name);
-console.log(Games[0].constructor.name);
-console.log(typeof(Games[0]));
-console.log(Games[0].prototype);
-*/
-client.login("Nzk5MDUwMzg1OTU1MzU2NzUz.X_97qQ.xPxjggtu4Bx5yn3QV9-_8B1DY08");
+client.login(process.env.DISCORD_TOKEN);
 
 client.on("ready", () => {
     console.log("Bot Started");
