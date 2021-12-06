@@ -1,0 +1,254 @@
+[
+   {
+      "emoji": "⬅️",
+      "name": "Start",
+      "type": "start"
+   },
+   {
+      "emoji": "🟫",
+      "name": "Brown1",
+      "type": "property",
+      "price": 60,
+      "group": "brown"
+   },
+   {
+      "emoji": "💰",
+      "name": "Chest1",
+      "type": "chest"
+   },
+   {
+      "emoji": "🟫",
+      "name": "Brown2",
+      "type": "property",
+      "price": 60,
+      "group": "brown"
+   },
+   {
+      "emoji": "🧾",
+      "name": "Tax1",
+      "type": "tax"
+   },
+   {
+      "emoji": "🚂",
+      "name": "Station1",
+      "type": "station",
+      "price": "200"
+   },
+   {
+      "emoji": "🟦",
+      "name": "Blue1",
+      "type": "property",
+      "price": 100,
+      "group": "blue"
+   },
+   {
+      "emoji": "❓",
+      "name": "Chance1",
+      "type": "chance"
+   },
+   {
+      "emoji": "🟦",
+      "name": "Blue2",
+      "type": "property",
+      "price": 100,
+      "group": "blue"
+   },
+   {
+      "emoji": "🟦",
+      "name": "Blue3",
+      "type": "property",
+      "price": 120,
+      "group": "blue"
+   },
+   {
+      "emoji": "⛓️",
+      "name": "Prison",
+      "type": "prison"
+   },
+   {
+      "emoji": "🟪",
+      "name": "Purple1",
+      "type": "property",
+      "price": 140,
+      "group": "purple"
+   },
+   {
+      "emoji": "💡",
+      "name": "Public1",
+      "type": "service",
+      "price": "150",
+      "group":"utility"
+   },
+   {
+      "emoji": "🟪",
+      "name": "Purple2",
+      "type": "property",
+      "price": 140,
+      "group": "purple"
+   },
+   {
+      "emoji": "🟪",
+      "name": "Purple3",
+      "type": "property",
+      "price": 160,
+      "group": "purple"
+   },
+   {
+      "emoji": "🚂",
+      "name": "Station2",
+      "type": "station",
+      "price": "200"
+   },
+   {
+      "emoji": "🟧",
+      "name": "Orange1",
+      "type": "property",
+      "price": 180,
+      "group": "orange"
+   },
+   {
+      "emoji": "💰",
+      "name": "Chest2",
+      "type": "chest"
+   },
+   {
+      "emoji": "🟧",
+      "name": "Orange2",
+      "type": "property",
+      "price": 180,
+      "group": "orange"
+   },
+   {
+      "emoji": "🟧",
+      "name": "Orange3",
+      "type": "property",
+      "price": 200,
+      "group": "orange"
+   },
+   {
+      "emoji": "🚗",
+      "name": "Parking",
+      "type": "parking"
+   },
+   {
+      "emoji": "🟥",
+      "name": "Red1",
+      "type": "property",
+      "price": 220,
+      "group": "red"
+   },
+   {
+      "emoji": "❓",
+      "name": "Chance2",
+      "type": "chance"
+   },
+   {
+      "emoji": "🟥",
+      "name": "Red2",
+      "type": "property",
+      "price": 220,
+      "group": "red"
+   },
+   {
+      "emoji": "🟥",
+      "name": "Red3",
+      "type": "property",
+      "price": 240,
+      "group": "red"
+   },
+   {
+      "emoji": "🚂",
+      "name": "Station3",
+      "type": "station",
+      "price": "200"
+   },
+   {
+      "emoji": "🟨",
+      "name": "Yellow1",
+      "type": "property",
+      "price": 260,
+      "group": "yellow"
+   },
+   {
+      "emoji": "🟨",
+      "name": "Yellow2",
+      "type": "property",
+      "price": 260,
+      "group": "yellow"
+   },
+   {
+      "emoji": "🚰",
+      "name": "Public2",
+      "type": "service",
+      "price": "150",
+      "group":"utility"
+   },
+   {
+      "emoji": "🟨",
+      "name": "Yellow3",
+      "type": "property",
+      "price": 280,
+      "group": "yellow"
+   },
+   {
+      "emoji": "👮",
+      "name": "Police",
+      "type": "police"
+   },
+   {
+      "emoji": "🟩",
+      "name": "Green1",
+      "type": "property",
+      "price": 300,
+      "group": ""
+   },
+   {
+      "emoji": "🟩",
+      "name": "Green2",
+      "type": "property",
+      "price": 300,
+      "group": "green"
+   },
+   {
+      "emoji": "💰",
+      "name": "Chest1",
+      "type": "chest"
+   },
+   {
+      "emoji": "🟩",
+      "name": "Green3",
+      "type": "property",
+      "price": 320,
+      "group": "green"
+   },
+   {
+      "emoji": "🚂",
+      "name": "Station4",
+      "type": "station",
+      "price": "200"
+   },
+   {
+      "emoji": "❓",
+      "name": "Chance3",
+      "type": "chance"
+   },
+   {
+      "emoji": "⬜",
+      "name": "Black1",
+      "type": "property",
+      "price": 350,
+      "group": "white"
+   },
+   {
+      "emoji": "💍",
+      "name": "Tax1",
+      "type": "tax"
+   },
+   {
+      "emoji": "⬜",
+      "name": "Black2",
+      "type": "property",
+      "price": 400,
+      "group": "white"
+   }
+]
