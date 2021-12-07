@@ -1,11 +1,9 @@
 const Game = require('../game.js').Game;
 const renderBoard = require('./board.js');
 const { update_status, STATUS } = require('./status.js');
-const { tryUpdate, getRandomInt, getRent } = require('../util.js');
+const { tryUpdate, getRandomInt } = require('../util.js');
 const { handleTile } = require('./tile.js');
 const monopolyInteraction = require('./interaction.js');
-var dice = ['<:d1:877512394887282708>', '<:d2:877512394862116875>', '<:d3:877512393507352627>', '<:d4:877512392915968060>', '<:d5:877512391401824257>', '<:d6:877512390659411968>']
-
 
 class Monopoly extends Game {
     async onStart() {
@@ -16,16 +14,19 @@ class Monopoly extends Game {
         this.players.forEach(player => playerNames = playerNames.concat(" " + player.name + " ").concat(player.emoji));
         await this.channel.send("Game Started. Participants in Order:" + playerNames);
         this.turnIndex = 0;
-        await renderBoard(this.channel, this.board, this.players);
+        await this.render();
         this.startTurn();
     }
 
     async startTurn() {
         let currentPlayer = this.getPlayer();
+        if (currentPlayer.jailed) {
+            await this.update_state("".concat(currentPlayer.emoji) + " is in prison, they can either try to get a double, pay 200$, or use a get out of jail card if they have one...", STATUS.IN_JAIL);
+        }
         if (!this.rollAgain)
-            this.status_msg = await update_status(this.channel, this.status_msg, "".concat(currentPlayer.emoji) + " can throw the dice", STATUS.CAN_ROLL);
+            this.status_msg = await this.update_state("".concat(currentPlayer.emoji) + " can throw the dice", STATUS.CAN_ROLL);
         else
-            this.dice_msg = await update_status(this.channel, this.status_msg, "".concat(player.emoji) + " rolled a double and can throw the dice again", STATUS.CAN_ROLL);
+            this.dice_msg = await this.update_state("".concat(player.emoji) + " rolled a double and can throw the dice again", STATUS.CAN_ROLL);
     }
 
     async endTurn() {
@@ -61,6 +62,15 @@ class Monopoly extends Game {
 
     getPlayer() {
         return this.players[this.turnIndex];
+    }
+
+    async render() {
+        await renderBoard(this.channel, this.board, this.players);
+    }
+
+    async update_state(str, status) {
+        this.status = status;
+        await update_status(this.channel, this.status_msg, str , status);
     }
 }
 

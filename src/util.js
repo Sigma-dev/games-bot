@@ -1,3 +1,5 @@
+var dice = ['<:d1:877512394887282708>', '<:d2:877512394862116875>', '<:d3:877512393507352627>', '<:d4:877512392915968060>', '<:d5:877512391401824257>', '<:d6:877512390659411968>']
+
 async function tryUpdate(channel, msg, newContent) {
     if (!msg) {
         return await channel.send(newContent);
@@ -8,31 +10,33 @@ async function tryUpdate(channel, msg, newContent) {
     return msg;
 }
 
-function getRent(tile, roll) {
+function getRent(tile, roll, groupsNbs) {
     if (tile.type == "property") {
+        let rent;
         if (!tile.houseNb)
-            return (tile.price / 10) - 4;
+            rent =  (tile.price / 10) - 4;
         if (tile.houseNb == 1)
-            return (tile.price / 2) - 20;
+        rent = (tile.price / 2) - 20;
         if (tile.houseNb == 2)
-            return ((tile.price / 10) - 4) * 3;
+        rent = ((tile.price / 10) - 4) * 3;
         if (tile.houseNb == 3)
-            return (((tile.price / 10) - 4) * 6 + 140) % 50 * 50;
+        rent = (((tile.price / 10) - 4) * 6 + 140) / 50 * 50;
         if (tile.houseNb == 4)
-            return ((tile.price / 10) - 4) * 7 + 210;
+        rent = ((tile.price / 10) - 4) * 7 + 210;
+        return (tile.owner.ownedGroups[tile.group] == groupsNbs[tile.group]) ? rent * 2 : rent; 
     }
     if (tile.type == "service") {
-        if (tile.owner.servicesOwned == 2)
+        if (tile.owner.ownedGroups[tile.group] == 2)
             return roll * 10;
         else
             return roll * 4;
     }
     if (tile.type == "station") {
-        if (tile.owner.stationsOwned == 4)
+        if (tile.owner.ownedGroups[tile.group] == 4)
             return 200;
-        else if (tile.owner.stationsOwned == 3)
+        else if (tile.owner.ownedGroups[tile.group] == 3)
             return 100;
-        else if (tile.owner.stationsOwned == 2)
+        else if (tile.owner.ownedGroups[tile.group] == 2)
             return 50;
         else
             return 25;
@@ -59,5 +63,17 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+function get_groupNbs(tiles) {
+    let res = {};
+    tiles.forEach(tile => {
+        if (tile.group) {
+            if (!res[tile.group])
+                res[tile.group] = 0;
+            res[tile.group] += 1;
+        }
+    });
+    console.log(res);
+    return res;
+}
 
-module.exports = { tryUpdate, getRandomInt, getRent, getHousePrice };
+module.exports = { tryUpdate, getRandomInt, getRent, getHousePrice, get_groupNbs, dice };
