@@ -1,7 +1,7 @@
 const Game = require('../game.js').Game;
 const renderBoard = require('./board.js');
 const { update_status, STATUS } = require('./status.js');
-const { tryUpdate, getRandomInt } = require('../util.js');
+const { tryUpdate, getRandomInt, dice } = require('../util.js');
 const { handleTile } = require('./tile.js');
 const monopolyInteraction = require('./interaction.js');
 
@@ -22,11 +22,12 @@ class Monopoly extends Game {
         let currentPlayer = this.getPlayer();
         if (currentPlayer.jailed) {
             await this.update_state("".concat(currentPlayer.emoji) + " is in prison, they can either try to get a double, pay 200$, or use a get out of jail card if they have one...", STATUS.IN_JAIL);
+            return;
         }
         if (!this.rollAgain)
-            this.status_msg = await this.update_state("".concat(currentPlayer.emoji) + " can throw the dice", STATUS.CAN_ROLL);
+            await this.update_state("".concat(currentPlayer.emoji) + " can throw the dice", STATUS.CAN_ROLL);
         else
-            this.dice_msg = await this.update_state("".concat(player.emoji) + " rolled a double and can throw the dice again", STATUS.CAN_ROLL);
+            await this.update_state("".concat(currentPlayer.emoji) + " rolled a double and can throw the dice again", STATUS.CAN_ROLL);
     }
 
     async endTurn() {
@@ -51,6 +52,8 @@ class Monopoly extends Game {
         let d2 = getRandomInt(6) + 1;
 
         this.dice_msg = await tryUpdate(this.channel, this.dice_msg, dice[d1 - 1] + dice[d2 - 1]);
+        if (player.position + d1 + d2 >= 40)
+            player.money += 200;
         player.position = (player.position + (d1 + d2)) % 40;
         await renderBoard(this.channel, this.board, this.players);
         if (d1 == d2)
@@ -70,7 +73,7 @@ class Monopoly extends Game {
 
     async update_state(str, status) {
         this.status = status;
-        await update_status(this.channel, this.status_msg, str , status);
+        this.status_msg = await update_status(this.channel, this.status_msg, str, status);
     }
 }
 

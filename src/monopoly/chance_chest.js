@@ -14,7 +14,7 @@ let chests = [
 ]
 
 function handleChance(game, player) {
-    let chance = chances[getRandomInt(0, chance.length)];
+    let chance = chances[getRandomInt(0, chances.length)];
 
     if (chance.type == "to_start") {
         player.position = 0;

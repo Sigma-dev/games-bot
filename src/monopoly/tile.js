@@ -1,4 +1,4 @@
-const { handleChance, handleChest } = require('../chance_chest.js');
+const { handleChance, handleChest } = require('./chance_chest.js');
 const { getRent, getHousePrice, get_groupNbs } = require('../util.js');
 const { STATUS } = require('./status.js');
 
@@ -23,7 +23,7 @@ function handleTile(tiles, game, player, roll) {
             else {
                 player.money -= rent;
                 tile.owner.money += rent;
-                game.update_state("".concat(player.emoji) + " landed on " + tile.name + " and paid the " + rent + '$ rent to ' + "".concat(tile.owner.emoji) + ', leaving him with ' + player.money + '$', STATUS.NONE);
+                game.update_state("".concat(player.emoji) + " landed on " + tile.name + " and paid the " + rent + '$ rent to ' + "".concat(tile.owner.emoji) + ', leaving him with ' + player.money + '$', STATUS.CAN_SKIP);
             }
         }
         else {
@@ -36,10 +36,10 @@ function handleTile(tiles, game, player, roll) {
                     else if (tile.houseNb == 4) 
                         game.update_state("".concat(player.emoji) + " landed on " + tile.name + " with " + tile.houseNb + "houses and can buy a hotel for " + getHousePrice(tile) + "$" , STATUS.CAN_BUY_HOUSE);
                     else
-                    game.update_state("".concat(player.emoji) + " landed on " + tile.name + " with a hotel and a rent of" + rent + "$" , STATUS.NONE);
+                    game.update_state("".concat(player.emoji) + " landed on " + tile.name + " with a hotel and a rent of" + rent + "$" , STATUS.CAN_SKIP);
                 }
                 else {
-                    game.update_state("".concat(player.emoji) + " landed on " + tile.name + " that he owns that has a rent of " + rent + "$" , STATUS.NONE);
+                    game.update_state("".concat(player.emoji) + " landed on " + tile.name + " that he owns that has a rent of " + rent + "$" , STATUS.CAN_SKIP);
                 }
         }
     }
@@ -59,9 +59,9 @@ function handleTile(tiles, game, player, roll) {
         if (!game.bank)
             game.bank = 0;
         if (game.bank == 0)
-            game.update_state("".concat(player.emoji) + " landed on the" + tile.name + "but there was no money to be won..." , STATUS.CAN_SKIP);
+            game.update_state("".concat(player.emoji) + " landed on the " + tile.name + " but there was no money to be won..." , STATUS.CAN_SKIP);
         else {
-            game.update_state("".concat(player.emoji) + " landed on the" + tile.name + "and won " + game.bank + "$, leaving him with " + player.money + "$" , STATUS.CAN_SKIP);
+            game.update_state("".concat(player.emoji) + " landed on the " + tile.name + " and won " + game.bank + "$, leaving him with " + player.money + "$" , STATUS.CAN_SKIP);
             player.money += game.bank;
             game.bank = 0;
         
@@ -77,7 +77,7 @@ function handleTile(tiles, game, player, roll) {
         player.position = 10;
         player.jailed = 3;
         game.render();
-        game.update_state("".concat(playeR.emoji) + "got himself in prison", STATUS.CAN_SKIP)
+        game.update_state("".concat(player.emoji) + "got himself in prison", STATUS.CAN_SKIP)
     }
     else {
         game.update_state("Sorry " + "".concat(player.emoji) + "but the dev didn't do his job for that tile...", STATUS.CAN_SKIP);

@@ -20,10 +20,10 @@ client.on("messageCreate", (message) => {
       tryCreate(message);
     }
     if (channels.includes(message.channel.name) && !currentGames[message.channel.name] && message.content == "Help") {
-        message.channel.send("To start a queue for the game, use 'Start x' where x is the number of seconds you want the queue to last");
+        message.channel.send("To start a queue for the game, use 'Start x' where x is the number of seconds you want the queue to last https://github.com/Sigma-dev/games-bot");
     }
     if (message.channel.name === "monopoly" && message.content === "s")
-        new Queue(message.channel, em, 3);
+        new Queue(message.channel, em, 15);
 });
 client.on('interactionCreate', interaction => {
     if (!interaction.isButton()) return;

@@ -11,27 +11,31 @@ async function tryUpdate(channel, msg, newContent) {
 }
 
 function getRent(tile, roll, groupsNbs) {
+    if (!tile.owner)
+        tile.owner = null;
     if (tile.type == "property") {
         let rent;
         if (!tile.houseNb)
-            rent =  (tile.price / 10) - 4;
+            rent = (tile.price / 10) - 4;
         if (tile.houseNb == 1)
-        rent = (tile.price / 2) - 20;
+            rent = (tile.price / 2) - 20;
         if (tile.houseNb == 2)
-        rent = ((tile.price / 10) - 4) * 3;
+            rent = ((tile.price / 10) - 4) * 3;
         if (tile.houseNb == 3)
-        rent = (((tile.price / 10) - 4) * 6 + 140) / 50 * 50;
+            rent = (((tile.price / 10) - 4) * 6 + 140) / 50 * 50;
         if (tile.houseNb == 4)
-        rent = ((tile.price / 10) - 4) * 7 + 210;
-        return (tile.owner.ownedGroups[tile.group] == groupsNbs[tile.group]) ? rent * 2 : rent; 
+            rent = ((tile.price / 10) - 4) * 7 + 210;
+        return (tile.ownner && tile.owner.ownedGroups[tile.group] == groupsNbs[tile.group]) ? rent * 2 : rent;
     }
     if (tile.type == "service") {
-        if (tile.owner.ownedGroups[tile.group] == 2)
+        if (tile.owner && tile.owner.ownedGroups[tile.group] == 2)
             return roll * 10;
         else
             return roll * 4;
     }
     if (tile.type == "station") {
+        if (!tile.owner)
+            return 25;
         if (tile.owner.ownedGroups[tile.group] == 4)
             return 200;
         else if (tile.owner.ownedGroups[tile.group] == 3)
@@ -72,7 +76,6 @@ function get_groupNbs(tiles) {
             res[tile.group] += 1;
         }
     });
-    console.log(res);
     return res;
 }
 
